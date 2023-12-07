@@ -37,6 +37,7 @@ let package = Package(
                       "cmake",
                       "format_all.sh",
                       "gn",
+                      "include",
                       "main.cpp",
                       "pkg-config",
                       "reference",
