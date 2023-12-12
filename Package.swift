@@ -54,8 +54,8 @@ let package = Package(
                       "test_shaders.py",
                       "test_shaders.sh",
                       "tests-other",
-                      "update_test_shaders.sh",
-                      "spirv_cfg.cpp",
+                      "update_test_shaders.sh"],
+            sources: ["spirv_cfg.cpp",
                       "spirv_cpp.cpp",
                       "spirv_cross.cpp",
                       "spirv_cross_c.cpp",
@@ -66,7 +66,6 @@ let package = Package(
                       "spirv_msl.cpp",
                       "spirv_parser.cpp",
                       "spirv_reflect.cpp"],
-            sources: [],
             publicHeadersPath: ".",
             cxxSettings: [
                 .define("SPIRV_CROSS_C_API_CPP", to: "0"), // According to the docs, it is deprecated
