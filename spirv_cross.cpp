@@ -4423,9 +4423,11 @@ bool Compiler::ActiveBuiltinHandler::handle(spv::Op opcode, const uint32_t *args
 		for (uint32_t i = 0; i < count; i++)
 		{
 			// Pointers
-			if (opcode == OpPtrAccessChain && i == 0 && type->parent_type != 0)
+			if (opcode == OpPtrAccessChain && i == 0)
 			{
-				type = &compiler.get<SPIRType>(type->parent_type);
+				if(type->parent_type != 0) {
+					type = &compiler.get<SPIRType>(type->parent_type);
+				}
 				continue;
 			}
 
