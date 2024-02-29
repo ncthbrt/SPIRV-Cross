@@ -18259,8 +18259,6 @@ void CompilerMSL::analyze_argument_buffers()
 
 					if (resource.descriptor_alias && resource.descriptor_alias != resource.var)
 						buffer_aliases_argument.push_back({ var.self, resource.descriptor_alias->self });
-					else if (type.array.empty())
-						set_qualified_name(var.self, join("(*", to_name(buffer_variable_id), ".", mbr_name, ")"));
 					else
 						set_qualified_name(var.self, join(to_name(buffer_variable_id), ".", mbr_name));
 				}
