@@ -15226,6 +15226,7 @@ string CompilerMSL::to_member_reference(uint32_t base, const SPIRType &type, uin
 	// Otherwise, if this is a pointer expression, dereference it.
 
 	bool declared_as_pointer = false;
+	bool declared_as_array = false;
 
 	if (var)
 	{
@@ -15236,10 +15237,11 @@ string CompilerMSL::to_member_reference(uint32_t base, const SPIRType &type, uin
 
 		bool is_buffer_variable =
 		    is_block && (var->storage == StorageClassUniform || var->storage == StorageClassStorageBuffer);
-		declared_as_pointer = is_buffer_variable && is_array(get_pointee_type(var->basetype));
+		declared_as_array = is_array(get_pointee_type(var->basetype));
+		declared_as_pointer = is_buffer_variable;
 	}
 
-	if (declared_as_pointer || (!ptr_chain_is_resolved && should_dereference(base)))
+	if ((declared_as_pointer && declared_as_array) || (!ptr_chain_is_resolved && (should_dereference(base) || declared_as_pointer)))
 		return join("->", to_member_name(type, index));
 	else
 		return join(".", to_member_name(type, index));
