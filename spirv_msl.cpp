@@ -15241,7 +15241,7 @@ string CompilerMSL::to_member_reference(uint32_t base, const SPIRType &type, uin
 		declared_as_pointer = is_buffer_variable;
 	}
 
-	if ((declared_as_pointer && declared_as_array) || (!ptr_chain_is_resolved && (should_dereference(base) || declared_as_pointer)))
+	if ((declared_as_pointer && declared_as_array) || (!ptr_chain_is_resolved && (should_dereference(base) || (declared_as_pointer && !declared_as_array))))
 		return join("->", to_member_name(type, index));
 	else
 		return join(".", to_member_name(type, index));
