@@ -10302,7 +10302,7 @@ string CompilerGLSL::access_chain_internal(uint32_t base, const uint32_t *indice
 						// For pointer chains, the pointer-ness is resolved through an array access.
 						// The only time this is not true is when accessing array of SSBO/UBO.
 						// This case is explicitly handled.
-						expr += to_member_reference(base, *type, index, ptr_chain || i != 0);
+						expr += to_member_reference(base, *type, index, ptr_chain || i != 0, access_chain_is_arrayed);
 					}
 				}
 			}
@@ -15024,7 +15024,7 @@ string CompilerGLSL::to_member_name(const SPIRType &type, uint32_t index)
 		return join("_m", index);
 }
 
-string CompilerGLSL::to_member_reference(uint32_t, const SPIRType &type, uint32_t index, bool)
+string CompilerGLSL::to_member_reference(uint32_t, const SPIRType &type, uint32_t index, bool, bool)
 {
 	return join(".", to_member_name(type, index));
 }
